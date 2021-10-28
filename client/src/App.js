@@ -1,19 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { Container } from "semantic-ui-react";
 import { Route, Switch } from "react-router";
-import Home from "./components/Home";
-import Things from "./components/Things";
+import { routes } from "./pages/routes";
 
 function App() {
+  const renderRoutes = () => {
+    return routes.map((route) => (
+      <Route exact path={route.pathname} component={route.component} />
+    ));
+  };
   return (
     <>
       <Navbar />
       <Container>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/things" component={Things} />
+          {renderRoutes()}
           <Route component={() => <p>react router 404 path not found</p>} />
         </Switch>
       </Container>
